@@ -1,3 +1,4 @@
+<?php include('server.php')?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -17,14 +18,17 @@
 					Sign_Up
 				</button>
 			</div>
-			<form action = "#" method = "post" id="Login_form_tag" class="input_items">
+			<form action = "index.php" method = "post" id="Login_form_tag" class="input_items">
 				<input type="text" name="login" class="input_fields" placeholder="Enter the name" required>
 				<input type="text" name="password" class="input_fields" placeholder="Enter Password" required>
 				<button type="submit" class="login_form_btn">Submit</button>
 				<button type="reset" class="login_form_btn">Clear</button>
 			</form>
 			<!-- invisible_form -->
-			<form id="signup_form_tag" class="input_items">
+			<form action = "index.php" method = "post" id="signup_form_tag" class="input_items">
+				<div>				
+					<?php include('errors.php')?>
+				</div>
 				<input type="text" name="username" class="input_fields" placeholder="Enter the name" required>
 				<input type="email" name="email" class="input_fields" placeholder="Enter the name" required>
 				<input type="text" name="password" class="input_fields" placeholder="Enter Password" required>

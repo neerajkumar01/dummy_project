@@ -1,15 +1,12 @@
-<?php
+<?php 
 
 session_start();
 
-if(isset($_SESSION['USERNAME']))
+if(!isset($_SESSION['username']))
 {
-    $_SESSION['message'] = "You Are Not Loggrd In: Please Login To View This Page:";
-    header("location : index.php"); 
+    header('location:index.php');
 }
-
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,6 +56,14 @@ if(isset($_SESSION['USERNAME']))
 
                 }
         }
+                .welcome
+                {
+                    
+                    margin-top:3%;
+                    text-align:center;
+                    font-weight:700;
+                }
+
                 .homeflexcontainer .box-1
                 {
                     border:3px solid yellow;
@@ -86,52 +91,35 @@ if(isset($_SESSION['USERNAME']))
 </head>
 <body>
 
-<?php
-    if(insert($_SESSION['SUCCESS'])) : 
-?>
-    <div class="container_class">
+        <div class="container_class">
+        <h3 class="welcome">
+        Welcome <?php echo $_SESSION['username']; 
+        ?>
+        </h3>
+        <a href="logout.php" style="float:right;margin-right:2%;">Log_Out</a>
+            <div class="homeflexcontainer">
         
-            <h3>
-            <?php
-                echo $_SESSION['SUCCESS'];
-                unset($_SESSION['SUCCESS']);
-            ?>
-            </h3>
+                    <div class="box-1">   
+                        <a href="add.html" class="box_anchor">
+                            <i class="fa fa-2x fa-home"></i>
+                            <h2>Add the Details</h2> 
+                        </a>
+                    </div>
 
-    </div>
+                    <div class="box-2">   
+                        <a href="#" class="box_anchor"> 
+                            <i class="fas fa-2x fa-chalkboard-teacher"></i>
+                            <h2>Update the Details</h2>
+                        </a>
+                    </div>
 
-    <?php endif ?>
-
-    //if user logs in then print the info 
-
-    <?php 
-    if(isset($_SESSION['USERNAME'])) : ?>
-        <h3>Welcome <?php echo $_SESSION['USERNAME'];?> </h3>
-        <button> <a href="home.php?logout = '1' ">Log_Out</a></button>
-        <?php endif ?>
-        <div class="homeflexcontainer">
-        
-        <div class="box-1">   
-            <a href="add.html" class="box_anchor">
-                <i class="fa fa-2x fa-home"></i>
-                <h2>Add the Details</h2> 
-            </a>
+                    <div class="box-3">
+                        <a href="#" class="box_anchor">    
+                            <i class="fas fa-2x fa-search"></i>
+                            <h2>Search the Details</h2>
+                        </a>
+                    </div>       
+            </div>
         </div>
-
-        <div class="box-2">   
-            <a href="#" class="box_anchor"> 
-                <i class="fas fa-2x fa-chalkboard-teacher"></i>
-                <h2>Update the Details</h2>
-            </a>
-        </div>
-
-        <div class="box-3">
-            <a href="#" class="box_anchor">    
-                <i class="fas fa-2x fa-search"></i>
-                <h2>Search the Details</h2>
-            </a>
-        </div>       
-    </div>
-    </div>
 </body>
 </html>

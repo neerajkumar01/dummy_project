@@ -96,12 +96,12 @@ if(!isset($_SESSION['username']))
         Welcome <?php echo $_SESSION['username']; 
         ?>
         </h3>
-        <a href="logout.php" style="float:right;margin-right:2%;">Log_Out</a>
+        <a href="logout.php" style="float:right;margin-right:2%;text-decoration:none;"><i class="fas fa-power-off"></i> Log_Out</a>
             <div class="homeflexcontainer">
         
                     <div class="box-1">   
-                        <a href="add.html" class="box_anchor">
-                            <i class="fa fa-2x fa-home"></i>
+                        <a href="add.php" class="box_anchor">
+                            <i class="fas fa-2x fa-user-plus"></i>                            
                             <h2>Add the Details</h2> 
                         </a>
                     </div>

@@ -22,7 +22,7 @@ if( $num == 1)
     echo "Username Already Exists: ";
 }
 else{
-    $registration = "  INSERT INTO registration_and_login(USERNAME, PASSWORD) VALUES ('$name','$password')";
+    $registration = "INSERT INTO registration_and_login(USERNAME, PASSWORD) VALUES ('$name','$password')";
     mysqli_query($connection, $registration);
     echo "Registration Successful";
 }

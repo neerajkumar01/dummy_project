@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 //header('location:index.php');
 
@@ -26,7 +25,8 @@ if( $num == 1)
     $_SESSION['username'] = $name;
     header('location:home.php');
 }
-else{
+else
+{
     header('location:index.php');
 }
 

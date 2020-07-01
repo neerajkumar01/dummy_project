@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['username']))
+{
+    header('location:index.php');
+}
 error_reporting(0);
 $server = "localhost"; 
 $username = "root";
@@ -15,6 +21,13 @@ $query = "SELECT * FROM pdetails WHERE PNAME='$search' OR PHONENUMONE = '$search
 $data = mysqli_query($connection, $query);
 
 $total = mysqli_num_rows($data);
+
+// //data from second database
+
+$query1 = "SELECT * FROM consultation WHERE CONSULTATIONID=1";
+$dataone=mysqli_query($connection, $query1);
+$dataamt=mysqli_fetch_assoc($dataone);
+
 ?>
 <html lang="en">
 <head>
@@ -86,9 +99,9 @@ $total = mysqli_num_rows($data);
 </head>
     <body>
         <div class="container_class">
-           
             <div class="flex_container">
-                <h3>Display Details</h3>
+                <h3>Display Details</h3>               <a href="home.php"><i class="fa fa-home"></i>home</i></a>
+
                 <div class="left_box">
                     <form action="display.php" method=post>
                    <input type="text" class="search-box" name="search" placeholder="Enter the Details to Search Eg: name, phone number">
@@ -103,31 +116,42 @@ $total = mysqli_num_rows($data);
                         <tr>
                             <th>NAME</th>
                             <th>ADDRESS</th>
+                            <th>ADHAR ID</th>
+                            <th>AMOUNT</th>
                             <th>PHONE NUMBER</th>
                             <th>ALTERNATE NUMBER</th>
+                            <th>VISIT</th>
                         </tr>
-                <?php
-                        if($total != 0 && $search != "")
-                        {
-                            while($result = mysqli_fetch_assoc($data))
-                            {
-                                echo"
-                                <tr>
-                                    <td>".$result['PNAME']."</td>
-                                    <td>".$result['PADDRESS']."</td>
-                                    <td>".$result['PHONENUMONE']."</td>
-                                    <td>".$result['PHONENUMTWO']."</td>
-                                </tr>";
-                            }
-                        }
-                        else
-                        {
-                            echo"no records found";
-                        }
-                ?>
+                            <?php
+
+                                    if($total != 0 && $search != "")
+                                    {
+                                        while($result = mysqli_fetch_assoc($data))
+                                        {
+                                            echo"
+                                            <tr>
+                                                <td>".$result['PNAME']."</td>
+                                                <td>".$result['PADDRESS']."</td>
+                                                <td>".$result['ADHARID']."</td>
+                                                <td>".$result['AMOUNT']."</td>
+                                                <td>".$result['PHONENUMONE']."</td>
+                                                <td>".$result['PHONENUMTWO']."</td>
+                                                <td><a name='something' href='visit.php?d=$result[PID]&m=$result[PNAME]&a=$result[PADDRESS]&ad=$result[ADHARID]&am=$result[AMOUNT]&po=$result[PHONENUMONE]&pt=$result[PHONENUMTWO]&amt=$dataamt[CONSULTATIONFEE]'>Debit</a></td>
+                                                </tr>";
+                                        }                               // we have to take all the values to the visit page 
+                                                                        // from there we have to get data from 2 different variables say amount and initial amount to deduct then 
+                                                                        // and that data should be updated in the pdetails and visit details table. tadaaaaaaaaaaaaa
+
+                                                                        // if cannot call the data from the initial amount then add connection here and try to fetch it in the 
+                                                                        //get method and send it to visit 
+                                    }
+                                    else
+                                    {
+                                        echo"no records found";
+                                    }
+                            ?>
                     </table>
                </div>
-
             </div>
         </div>
     </body>

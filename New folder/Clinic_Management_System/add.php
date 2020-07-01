@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="css/a.css">
     <link rel="stylesheet" href="css/all.min.css">
     <style>
+        body
+        {
+            overflow-x:hidden;
+        }
+
         .outer_box
         {
             position: absolute;
@@ -22,7 +27,7 @@
             left:50%;
             transform:translate(-50%, -50%);
             width:60%;
-            height:80%;
+            height:90%;
             border: transparent;
             outline:none;
             border-radius:30px;
@@ -30,6 +35,7 @@
             z-index:410;
             cursor:pointer;
         }
+
         .form-box
         {
             position: relative;
@@ -39,12 +45,14 @@
             width:45%;
            
         }
+
         h1
         {
-            font-size: 37;
+            font-size: 1.9rem;
             text-align:center;
             margin-bottom: 5%;
         }
+
         .inputboxes
         {
             padding: 9px;
@@ -55,35 +63,50 @@
             background: none;
             outline: transparent;
         }
+
         .login_form_btn
         {
             margin-left:10%;
-
         }
+
         .login_form_btn:hover
         {
             margin-left:10%;
             box-shadow:0 0 15px 1800px rgba(7, 7, 7, 0.534);   
-
         }
-.icon-box
-{
-    margin-top:3%;
-    margin-right:3%;
-    text-align:right;
+   
+        @media(min-width:400px)
+        {
+            .icon-box
+            {
+                margin-top:-25%;
+                margin-right:3%;
+                text-align:right;
+                font-size:17px;
+            }
+        }
+        @media(min-width:700px)
+        {
+            .icon-box
+            {
+                margin-top:-5%;
+                margin-right:3%;
+                text-align:right;
+            }
+        }
 
-}
-.box_anchor i,h5,a
-{
-    display:inline;
-    text-decoration:none;    
-    color:white;
-}
-.box_anchor i
-{
-    text-decoration:none;    
-    color:white;
-}
+        .box_anchor i,h6,a
+        {
+            display:inline;
+            text-decoration:none;    
+            color:white;
+        }
+        
+        .box_anchor i
+        {
+            text-decoration:none;    
+            color:white;
+        }
     </style>
 </head>
 <body>
@@ -99,6 +122,10 @@
                 <!-- <textarea class="inputboxes"rows="5"  name="paddress" placeholder="Enter address" style="resize:none"></textarea> -->
                 <input class="inputboxes" type="text" name="paddress" placeholder="Enter address" required>
                 <br><br>
+                <input class="inputboxes" type="text" maxlength="12" name="adharid" pattern="[0-9]{12}"   placeholder="Enter Adhar Number" required>
+                <br><br>
+                <input class="inputboxes" type="number" maxlength="5" name="amount" placeholder="Initial amount paid" required>
+                <br><br>
                 <input class="inputboxes" type="text" maxlength="10" name="phonenumone"  pattern="[0-9]{10}" placeholder="Enter Phone Number" required><br><br>
                 <input class="inputboxes" type="text" maxlength="10" name="phonenumtwo"  pattern="[0-9]{10}" placeholder="Enter Phone Number" required><br><br>
                 <button type="submit" class="login_form_btn">Submit</button>
@@ -108,7 +135,7 @@
             <div class="icon-box">
                 <a href="home.php" class="box_anchor">
                         <i class="fa fa-home"></i>
-                        <h5>home</h5> 
+                        <h6>home</h6> 
                 </a>
                 
                 <br>
@@ -116,7 +143,7 @@
                 
                 <a href="logout.php" class="box_anchor">
                         <i class="fas fa-power-off"></i>
-                        <h5>Log_out</h5> 
+                        <h6>Log_out</h6> 
                 </a>
             </div>
             <!--  -->    
@@ -134,20 +161,19 @@
 
         $pname = $_POST['pname'];
         $paddress = $_POST['paddress'];
+        $adharid = $_POST['adharid'];
+        $initialamount = $_POST['amount'];
         $phonenumone = $_POST['phonenumone'];
         $phonenumtwo = $_POST['phonenumtwo'];
-    
-        // CREATE TABLE `clinic_management_database`.`pdetails` 
-        // ( `PID` INT NOT NULL AUTO_INCREMENT ,`PNAME` VARCHAR(255) 
-        // NOT NULL , `PADDRESS` VARCHAR(255) NOT NULL ,
-        // `PHONENUMONE` INT(10) NOT NULL ,
-        // `PHONENUMTWO` INT(10) NOT NULL ,
-        // PRIMARY KEY (`PID`)) ENGINE = InnoDB; 
-        $selectquery = "SELECT * FROM pdetails WHERE PNAME = '$pname' AND PHONENUMONE = '$phonenumone'";
+
+        $selectquery = "SELECT * FROM pdetails WHERE PNAME = '$pname' AND PHONENUMONE = '$phonenumone' OR PHONENUMONE = '$phonenumtwo' AND PHONENUMTWO	= '$phonenumtwo' OR PHONENUMTWO	= '$phonenumone'";
         
         $result = mysqli_query($connection, $selectquery);
 
         $rowcount = mysqli_num_rows($result);
+
+        $entrydate = date("Y/m/d");
+        $timeentered=date("Y/m/d h:i:s");//TIMEENTERED
 
         if($rowcount == 1)
         {
@@ -155,9 +181,11 @@
         }
         else
         { 
-            $query = "INSERT INTO pdetails(PNAME, PADDRESS, PHONENUMONE, PHONENUMTWO) VALUES('$pname','$paddress','$phonenumone','$phonenumtwo')";
+            $query = "INSERT INTO pdetails(PNAME, PADDRESS, ADHARID, AMOUNT, PHONENUMONE, PHONENUMTWO, ENTRYDATE, TIMEENTERED) VALUES('$pname','$paddress','$adharid','$initialamount','$phonenumone','$phonenumtwo','$entrydate','$timeentered')";
             mysqli_query($connection, $query);
+
+          //  $dailyrecord = "INSERT INTO dailyrecord(PNAME, PADDRESS, ADHARID, DATECAME, ENTRYTIME, AMOUNT, PID) VALUES('$pname','$paddress','$adharid','$entrydate','$initialamount')";
         }
-    ?>
+    ?><!-- ledger -->
 </body>
 </html>

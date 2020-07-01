@@ -29,6 +29,7 @@ if(!isset($_SESSION['username']))
         {
             text-align:end;
         }
+
         @media(min-width: 700px) 
         {
             
@@ -45,7 +46,6 @@ if(!isset($_SESSION['username']))
 
                 }
 
-
                 .homeflexcontainer div
                 {
                     border:3px solid white;
@@ -56,6 +56,7 @@ if(!isset($_SESSION['username']))
 
                 }
         }
+        
                 .welcome
                 {
                     
@@ -81,12 +82,18 @@ if(!isset($_SESSION['username']))
                     border:3px solid rgb(15, 250, 113);
 
                 } 
+
                 .box_anchor
                 {
                     text-decoration: none;
                 }
 
-
+                .amountbox
+                {
+                    float:right;
+                    margin-right:2%;
+                    text-decoration:none;
+                }
 </style>
 </head>
 <body>
@@ -96,7 +103,6 @@ if(!isset($_SESSION['username']))
         Welcome <?php echo $_SESSION['username']; 
         ?>
         </h3>
-        <a href="logout.php" style="float:right;margin-right:2%;text-decoration:none;"><i class="fas fa-power-off"></i> Log_Out</a>
             <div class="homeflexcontainer">
         
                     <div class="box-1">   
@@ -107,19 +113,22 @@ if(!isset($_SESSION['username']))
                     </div>
 
                     <div class="box-2">   
-                        <a href="#" class="box_anchor"> 
+                        <a href="displayupdate.php" class="box_anchor"> 
                             <i class="fas fa-2x fa-chalkboard-teacher"></i>
                             <h2>Update the Details</h2>
                         </a>
                     </div>
 
                     <div class="box-3">
-                        <a href="#" class="box_anchor">    
+                        <a href="display.php" class="box_anchor">    
                             <i class="fas fa-2x fa-search"></i>
                             <h2>Search the Details</h2>
                         </a>
                     </div>       
-            </div>
+            </div>       
+             <a href="logout.php" class="amountbox" ><i class="fas fa-power-off"></i> Log_Out</a>
+            <a href="initialamount.php" class="amountbox" ><i class="fa fa-cog" aria-hidden="true"></i> Consultation</a>
+            <a href="ledger.php" class="amountbox" ><i class="fas fa-book"></i> Ledger</a>
         </div>
 </body>
 </html>

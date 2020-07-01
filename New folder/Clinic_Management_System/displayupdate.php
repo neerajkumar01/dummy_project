@@ -1,9 +1,9 @@
 <?php
-  session_start();
- // if(!isset($_SESSION['username']))
-    // {
-    //     header('location:index.php');
-    // }
+    session_start();
+    if(!isset($_SESSION['username']))
+    {
+        header('location:index.php');
+    }
 error_reporting(0);
 $server = "localhost"; 
 $username = "root";
@@ -94,7 +94,7 @@ $total = mysqli_num_rows($data);
         <div class="container_class">
            
             <div class="flex_container">
-                <h3>Update Details</h3>
+                <h3>Update Details</h3><a href="home.php"><i class="fa fa-home"></i>home</i></a>
                 <div class="left_box">
                     <form action="displayupdate.php" method="post">
                    <input type="text" class="search-box" name="search" placeholder="Enter the Details to Search Eg: name, phone number">
@@ -109,6 +109,8 @@ $total = mysqli_num_rows($data);
                         <tr>
                             <th>NAME</th>
                             <th>ADDRESS</th>
+                            <th>AdharId</th>
+                            <th>Amount</th>
                             <th>PHONE NUMBER</th>
                             <th>ALTERNATE NUMBER</th>
                             <th>Edit</th>
@@ -123,9 +125,11 @@ $total = mysqli_num_rows($data);
                                 <tr>
                                     <td>".$result['PNAME']."</td>
                                     <td>".$result['PADDRESS']."</td>
+                                    <td>".$result['ADHARID']."</td>
+                                    <td>".$result['AMOUNT']."</td>
                                     <td>".$result['PHONENUMONE']."</td>
                                     <td>".$result['PHONENUMTWO']."</td>
-                                    <td><a href='update.php?d=$result[PID]&m=$result[PNAME]&a=$result[PADDRESS]&po=$result[PHONENUMONE]&pt=$result[PHONENUMTWO]'>Edit</a></td>
+                                    <td><a href='update.php?d=$result[PID]&m=$result[PNAME]&a=$result[PADDRESS]&ad=$result[ADHARID]&am=$result[AMOUNT]&po=$result[PHONENUMONE]&pt=$result[PHONENUMTWO]'>Edit</a></td>
                                 </tr>";
                             }
                         }

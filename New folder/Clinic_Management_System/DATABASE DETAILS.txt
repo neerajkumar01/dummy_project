@@ -3,3 +3,7 @@ DATABASE NAME : CLINIC_MANAGEMENT_DATABASE ;
 TABLE NAME : registration_and_login ;
 
 FIELDS/INDESES: ID USERNAME PASSWORD
+
+
+mini royal 2
+krunker
